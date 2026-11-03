@@ -21,7 +21,7 @@ jobs:
         id: image
         shell: bash
         run: |
-          echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+          echo "ghrc=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
           echo "dockerhub=${{ secrets.DOCKERHUB_USERNAME }}/dds-devops" >> "$GITHUB_OUTPUT"
 
       - name: Construir imagen Docker
