@@ -19,10 +19,12 @@ jobs:
 
       - name: Definir nombre de imagen
         id: image
+        env:
+          DH_USER: ${{ secrets.DOCKERHUB_USERNAME }}
         shell: bash
         run: |
-          echo "ghrc=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
-          echo "dockerhub=${{ secrets.DOCKERHUB_USERNAME }}/dds-devops" >> "$GITHUB_OUTPUT"
+          echo "ghcr=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+          echo "dockerhub=${DH_USER,,}/dds-devops" >> "$GITHUB_OUTPUT"
 
       - name: Construir imagen Docker
         run: docker build -t dds-devops:test .
