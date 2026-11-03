@@ -76,3 +76,9 @@ jobs:
           SHORT_SHA=${GITHUB_SHA::7}
           docker push ${{ steps.image.outputs.dockerhub }}:${SHORT_SHA}
           docker push ${{ steps.image.outputs.dockerhub }}:latest
+
+      - name: Disparar despliegue en Render
+        env:
+          DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl -fsS -X POST "$DEPLOY_HOOK"
